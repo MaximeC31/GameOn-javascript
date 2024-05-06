@@ -6,7 +6,6 @@ const navbarInteractions = (burgerIcon, navBar) => {
 	const resizeHeader = () => {
 		const windowWidth = window.innerWidth;
 		const responsivBreakPoint = 1024;
-		console.log(windowWidth);
 		if (windowWidth > responsivBreakPoint) {
 			navBar.style.marginTop = '0px';
 		} else {
@@ -84,6 +83,26 @@ const evalSubscriptionForm = (event, confirmationModal) => {
 		formDataContainer[index].appendChild(textContainer);
 	};
 
+	const checkBirthDate = () => {
+		const birthdateDOM = document.querySelector('#birthdate').value;
+		const birthdate = new Date(birthdateDOM);
+		const birthYear = birthdate.getFullYear();
+	
+		const actualDate = new Date();
+		const actualYear = actualDate.getFullYear();
+		const actualMonth = actualDate.getMonth();
+		const actualDay = actualDate.getDate();
+	
+		const min16 = new Date(actualYear - 16, actualMonth, actualDay + 1);
+
+		if (actualYear - birthYear > 100 || birthdate >= min16) {
+			return false;
+		}
+	
+		return true;
+	};
+	
+
 	const checkRadioTournament = () => {
 		const placeRadioInput = document.querySelectorAll('.checkbox-input');
 		for (let i = 0; i < 6; i++) {
@@ -124,6 +143,11 @@ const evalSubscriptionForm = (event, confirmationModal) => {
 			state = false;
 		}
 
+		if (checkBirthDate() === false) {
+			displayFormErrorMessage(3, '.formData', 'Veuillez entrer une date de naissance valide.');
+			state = false;
+		}
+
 		if (checkRadioTournament() === false) {
 			displayFormErrorMessage(5, '.formData', 'Vous devez choisir une option.');
 			state = false;
@@ -131,6 +155,11 @@ const evalSubscriptionForm = (event, confirmationModal) => {
 
 		if (gameOnNumberTournament.value === '') {
 			displayFormErrorMessage(4, '.formData', 'Veuillez entrer votre nombre de participation');
+			state = false;
+		}
+
+		if (gameOnNumberTournament.valueAsNumber < 0) {
+			displayFormErrorMessage(4, '.formData', 'Vous devez déjà avoir participé à des tournois');
 			state = false;
 		}
 
