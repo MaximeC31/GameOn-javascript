@@ -1,5 +1,1 @@
-Site web codé from fork, HTML/CSS/JavaScript.
-
-Le but est de donner un aperçu de mon expertise de développement web, notamment par l'usage de JavaScript vanilla et manipulations du DOM.
-
-Bonne visite 😊
+Site web codé à partir d'un fork en HTML/CSS/JavaScript, démonstration de mon expertise en développement web avec l'utilisation de JavaScript vanilla et la manipulation basique du DOM. Bonne exploration ! 😊
